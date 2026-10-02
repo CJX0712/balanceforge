@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.so
+
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Test / coverage
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+
+# Data caches and model artefacts
+.cache/
+data_cache/
+*.npz
+*.npy
+*.pkl
+*.joblib
+models/
+weights/
+
+# Local run artefacts (benchmark.json IS committed; these are not)
+sweep.json
+*.local.json
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit these
+.env
+.env.*
+*.pem
+*.key
+secrets/
+credentials.json

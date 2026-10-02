@@ -1,0 +1,22 @@
+# BalanceForge runtime + test dependencies.
+#
+# Version pinning is part of correctness, not convenience:
+#   * numpy 2.x removed np.float_ / np.trapz, which older scientific wheels
+#     still reference, so the floor is 2.0.
+#   * scikit-learn >= 1.9 removed LogisticRegression(multi_class=...), and its
+#     `lbfgs` solver is the only one that handles multiclass; the classifier
+#     factory depends on that.
+#   * imbalanced-learn >= 0.12 requires sklearn_compat and re-exports
+#     ClusterCentroids; 0.14 removed random_state from TomekLinks / ENN, which
+#     the Tier-0 wrapper detects via an explicit allowlist.
+#
+# requirements.lock.txt is the fully pinned, directly installable copy; this
+# file is the human-readable summary of why each version matters.
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.1
+imbalanced-learn==0.14.2
+optuna==5.0.0
+pytest==9.1.1
+pytest-cov==7.1.0
+ruff==0.16.9

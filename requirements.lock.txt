@@ -1,0 +1,44 @@
+# BalanceForge — fully pinned dependency lock
+#
+# Every version below was read from the interpreter that produced
+# `benchmark.json`, so these are the exact versions behind the reported
+# numbers (Python 3.13.14, win_amd64).
+#
+# `pip freeze` was NOT used directly: this environment's wheels were installed
+# from local paths, and the freeze output embedded absolute `file://` URLs that
+# would be meaningless on any other machine. A lock file that cannot be
+# installed is not a lock file.
+#
+# Regenerate on a clean machine:
+#   python -m pip install -r requirements.lock.txt
+#   python -c "import balanceforge; print(balanceforge.__version__)"
+#   python examples/run_demo.py
+
+# --- core scientific stack ---------------------------------------------------
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.1
+
+# --- Tier-0 imbalance backend -----------------------------------------------
+# imbalanced-learn 0.14 is the first release that requires sklearn_compat, and
+# it REMOVED the `random_state` parameter from TomekLinks and
+# EditedNearestNeighbours. balanceforge/sampling/tier0.py detects this with an
+# explicit allowlist rather than catching the TypeError, so a genuine signature
+# change elsewhere still surfaces.
+imbalanced-learn==0.14.2
+sklearn-compat==0.1.6
+
+# --- transitive -------------------------------------------------------------
+joblib==1.6.0
+threadpoolctl==3.6.0
+
+# --- optional: hyper-parameter search (balanceforge/hpo.py only) ------------
+optuna==5.0.0
+alabaster==1.0.0
+colorama==0.4.6
+
+# --- test / lint toolchain ---------------------------------------------------
+pytest==9.1.1
+pytest-cov==7.1.0
+coverage==7.16.2
+ruff==0.16.9

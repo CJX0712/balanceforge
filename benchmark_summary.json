@@ -1,0 +1,66 @@
+{
+  "gate": {
+    "flagship": "mosaic",
+    "flagship_mean": 0.8791107095326736,
+    "flagship_std": 0.08590530555698919,
+    "strongest_baseline": "balanced_rf",
+    "strongest_baseline_mean": 0.8979129188487122,
+    "strongest_baseline_std": 0.07493038292380733,
+    "compared_datasets": [
+      "separable",
+      "overlap",
+      "multimodal",
+      "sparse",
+      "manifold"
+    ],
+    "delta": -0.0188022093160386,
+    "threshold": 0.02,
+    "half_sigma_sum": 0.08041784424039826,
+    "significant": false,
+    "per_baseline": {
+      "smote": {
+        "mean": 0.8747252603492074,
+        "std": 0.0856652980852951
+      },
+      "adasyn": {
+        "mean": 0.85480750939433,
+        "std": 0.07602437132626706
+      },
+      "bsmote": {
+        "mean": 0.8398055401280731,
+        "std": 0.0903525392008429
+      },
+      "smoteenn": {
+        "mean": 0.8816890741263066,
+        "std": 0.075140623811851
+      },
+      "balanced_rf": {
+        "mean": 0.8979129188487122,
+        "std": 0.07493038292380733
+      },
+      "easy_ensemble": {
+        "mean": 0.7928869238779843,
+        "std": 0.14685458563171663
+      }
+    }
+  },
+  "threshold": 0.02,
+  "aggregate": {
+    "none": 0.6265519598957691,
+    "class_weight": 0.6255946917431716,
+    "ros": 0.7670744115035505,
+    "smote": 0.8747252603492074,
+    "adasyn": 0.8548075093943301,
+    "bsmote": 0.8398055401280731,
+    "svmsmote": 0.8195206047155278,
+    "rus": 0.8822983484133218,
+    "cc": 0.888342852717553,
+    "enn": 0.6138211468971607,
+    "tomek": 0.626069202440841,
+    "smoteenn": 0.8816890741263066,
+    "smotetomek": 0.8692292662940785,
+    "balanced_rf": 0.8979129188487122,
+    "easy_ensemble": 0.7928869238779843,
+    "mosaic": 0.8791107095326736
+  }
+}
