@@ -51,9 +51,7 @@ class MosaicConfig:
         }
     )
     """Per-regime cap on synthesised points as a fraction of the minority."""
-    offset_grid: tuple[float, ...] = tuple(
-        round(-1.5 + 0.25 * i, 4) for i in range(13)
-    )
+    offset_grid: tuple[float, ...] = tuple(round(-1.5 + 0.25 * i, 4) for i in range(13))
     """Per-class logit offsets searched by the calibrator (always contains 0)."""
 
 
@@ -152,9 +150,7 @@ def segment_contamination(
 # ------------------------------------------------------------------- stage 1
 
 
-def _condense_indices(
-    d: Dataset, keep: float
-) -> tuple[np.ndarray, np.ndarray]:
+def _condense_indices(d: Dataset, keep: float) -> tuple[np.ndarray, np.ndarray]:
     """Indices kept / dropped by majority condensation (deterministic).
 
     Majority points are ranked by their distance to the nearest minority
@@ -182,9 +178,7 @@ def _condense_indices(
     return kept_idx, dropped_maj
 
 
-def condense_majority(
-    d: Dataset, keep: float, seed: int
-) -> tuple[np.ndarray, int]:
+def condense_majority(d: Dataset, keep: float, seed: int) -> tuple[np.ndarray, int]:
     """Drop interior majority points, keep the boundary shell.
 
     Returns ``(X_kept, n_removed)`` where ``X_kept`` is the full feature
@@ -276,11 +270,7 @@ def contamination_gated_smote(
     rejected = 0
     for i in rng.permutation(Xm.shape[0]):
         j = int(nn[i, rng.integers(k)])
-        c = (
-            segment_contamination(Xm[i], Xm[j], maj, tau)
-            if maj.shape[0] and tau > 0.0
-            else 0.0
-        )
+        c = segment_contamination(Xm[i], Xm[j], maj, tau) if maj.shape[0] and tau > 0.0 else 0.0
         total += c
         if c > cfg.contamination_ceiling:
             rejected += 1
@@ -356,9 +346,7 @@ def rebalance(
     # --- stage 3: contamination-gated SMOTE tops it up ---------------------
     remaining = need - sum(p.shape[0] for p in synth_parts)
     if remaining > 0:
-        Xg, contam, mean_contam, rejected = contamination_gated_smote(
-            d, remaining, cfg, seed
-        )
+        Xg, contam, mean_contam, rejected = contamination_gated_smote(d, remaining, cfg, seed)
         audit["gate_contamination"] = round(contam, 6)
         audit["gate_mean_contamination"] = round(mean_contam, 6)
         audit["gate_rejected_segments"] = rejected

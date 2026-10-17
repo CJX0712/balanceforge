@@ -171,9 +171,7 @@ class PriorMatchedCalibrator:
     def fit(self, val: Dataset, proba: np.ndarray) -> PriorMatchedCalibrator:
         proba = np.asarray(proba, dtype=np.float64)
         k = proba.shape[1]
-        counts = np.array(
-            [int((val.y == c).sum()) for c in val.classes], dtype=np.float64
-        )
+        counts = np.array([int((val.y == c).sum()) for c in val.classes], dtype=np.float64)
         base = (
             prior_corrected_logit(proba, counts) if self.prior_correction else log_odds(proba)
         )
@@ -212,9 +210,7 @@ class PriorMatchedCalibrator:
         """Apply (optional prior correction +) fitted offsets, then softmax."""
         proba = np.asarray(proba, dtype=np.float64)
         base = (
-            prior_corrected_logit(proba, counts)
-            if self.prior_correction
-            else log_odds(proba)
+            prior_corrected_logit(proba, counts) if self.prior_correction else log_odds(proba)
         )
         offsets = self.offsets_ if self.offsets_ is not None else np.zeros(proba.shape[1])
         return apply_offsets(base, offsets)
