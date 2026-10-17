@@ -21,15 +21,16 @@ coverage.xml
 htmlcov/
 .mypy_cache/
 
-# Data caches and model artefacts
+# Data caches and model artefacts (root-level artefact dirs only — the
+# balanceforge/models/ source package must stay tracked!)
 .cache/
 data_cache/
 *.npz
 *.npy
 *.pkl
 *.joblib
-models/
-weights/
+/models/
+/weights/
 
 # Local run artefacts (benchmark.json IS committed; these are not)
 sweep.json
