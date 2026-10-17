@@ -4,6 +4,18 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
+
+from balanceforge.core.interfaces import estimate_profile
+from balanceforge.core.types import Dataset
+from balanceforge.data.datasets import available_datasets, get_dataset
+from balanceforge.data.splits import make_splits
+from balanceforge.evaluation.metrics import (
+    aggregate_across_seeds,
+    collect_failures,
+    compute_metrics,
+    gmean_score,
+    significant_win,
+)
 from balanceforge.models.classifiers import (
     PriorMatchedCalibrator,
     apply_offsets,
@@ -20,18 +32,6 @@ from balanceforge.models.mosaic import (
     per_mode_expand,
     rebalance,
     segment_contamination,
-)
-
-from balanceforge.core.interfaces import estimate_profile
-from balanceforge.core.types import Dataset
-from balanceforge.data.datasets import available_datasets, get_dataset
-from balanceforge.data.splits import make_splits
-from balanceforge.evaluation.metrics import (
-    aggregate_across_seeds,
-    collect_failures,
-    compute_metrics,
-    gmean_score,
-    significant_win,
 )
 from balanceforge.policy.router import SEPARABLE_CEILING, route
 from balanceforge.sampling import tier0, tier1
