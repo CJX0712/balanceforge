@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: pip install ruff==0.16.9  # pinned: matches requirements.lock.txt; unpinned ruff drifts (0.17 re-sorts imports)
+      - run: pip install ruff==0.16.10  # pinned to the verified version (0.16.9/0.17 disagree on multi-line import blocks)
       - name: ruff check
         run: ruff check .
       - name: ruff format --check
