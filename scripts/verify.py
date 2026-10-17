@@ -15,14 +15,14 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 import numpy as np  # noqa: E402
+from balanceforge.models.classifiers import (  # noqa: E402
+    calibration_is_admissible,
+)
 
 from balanceforge.core.config import BalanceForgeConfig  # noqa: E402
 from balanceforge.core.seed import derive_seed  # noqa: E402
 from balanceforge.data.datasets import available_datasets, get_dataset  # noqa: E402
 from balanceforge.data.splits import make_splits  # noqa: E402
-from balanceforge.models.classifiers import (  # noqa: E402
-    calibration_is_admissible,
-)
 from balanceforge.pipeline.runner import METHODS, BalancePipeline  # noqa: E402
 
 DATASETS = available_datasets()
@@ -127,14 +127,15 @@ def main() -> int:
     print("=" * 84)
     print("ablations (flagship, 3 seeds)")
     print("=" * 84)
-    from balanceforge.core.interfaces import estimate_profile
-    from balanceforge.evaluation.metrics import gmean_score
     from balanceforge.models.classifiers import (
         PriorMatchedCalibrator,
         make_classifier,
         prior_corrected_logit,
     )
     from balanceforge.models.mosaic import MosaicConfig, rebalance
+
+    from balanceforge.core.interfaces import estimate_profile
+    from balanceforge.evaluation.metrics import gmean_score
     from balanceforge.pipeline.runner import _prior_correction_needed, _spec
 
     def ablate(name: str, sigma=2.0, prior=True, learned=True) -> float:
