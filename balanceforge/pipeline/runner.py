@@ -187,7 +187,7 @@ class BalancePipeline:
                 seed=seed,
                 n_classes=train.n_classes,
                 class_weight=class_weight_for(
-                    "class_weight" if spec.class_weight else "", train.n_classes
+                    "balanced" if spec.class_weight else "", train.n_classes
                 ),
                 n_estimators=self.cfg.n_estimators,
                 max_depth=self.cfg.max_depth,
